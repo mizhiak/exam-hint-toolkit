@@ -1,7 +1,7 @@
 ﻿# snapshot-watch.ps1 — 从客户端 CEF 日志里还原"屏幕抓拍"的真实节奏
-# 用法: powershell -ExecutionPolicy Bypass -File snapshot-watch.ps1 [-Root "D:\kaoshi\Exam_Client\[6.1.511.1150]"] [-Tail 40]
+# 用法: powershell -ExecutionPolicy Bypass -File snapshot-watch.ps1 [-Root "C:\ProgramData\ExamClient"] [-Tail 40]
 param(
-  [string]$Root = 'D:\kaoshi\Exam_Client\[6.1.511.1150]',
+  [string]$Root = 'C:\ProgramData\ExamClient',
   [int]$Tail = 40,
   [switch]$Live
 )

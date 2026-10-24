@@ -30,7 +30,7 @@ public class MockExam : Form
 
         int y = 60;
         var head = new Label();
-        head.Text = "中国邮政广西分公司 2026 年第 2 期社会招聘笔试    第 12 题 / 共 60 题    剩余 41:22";
+        head.Text = "在线笔试模拟页面    第 12 题 / 共 60 题    剩余 41:22";
         head.Font = new Font("Microsoft YaHei", 11f, FontStyle.Regular);
         head.ForeColor = Color.FromArgb(0x66, 0x66, 0x66);
         head.SetBounds(60, 20, 1300, 30);

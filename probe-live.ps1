@@ -132,7 +132,7 @@ while ((Get-Date) -lt $deadline) {
     # --- 网络连通性（每 5 个 tick 一次）---
     if ($tick % 5 -eq 1) {
         $r = @()
-        foreach ($h in @('api.deepseek.com','www.baidu.com','exam.weicewang.com')) {
+        foreach ($h in @('api.deepseek.com','www.baidu.com','example.com')) {
             $ok = 'fail'
             try {
                 $c = New-Object System.Net.Sockets.TcpClient

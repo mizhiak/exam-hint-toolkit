@@ -1,5 +1,5 @@
 ﻿param(
-  [string[]]$Hosts = @('exam.weicewang.com','zhaopincdn.weicewang.com','api.deepseek.com','www.baidu.com','agora.io'),
+  [string[]]$Hosts = @('example.com','cdn.example.com','api.deepseek.com','www.baidu.com','agora.io'),
   [int]$Port = 443,
   [string]$Out = "$PSScriptRoot\netcheck.txt"
 )

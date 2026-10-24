@@ -33,7 +33,7 @@ $kit    = $PSScriptRoot
 $shot   = Join-Path $env:TEMP 'exam-shot.png'
 $qtxt   = Join-Path $env:TEMP 'exam-q.txt'
 $ans    = Join-Path $kit 'answers.txt'
-$logDir = 'D:\kaoshi\Exam_Client\[6.1.511.1150]\.log'
+$logDir = 'C:\ProgramData\ExamClient\.log'
 $runLog = Join-Path $env:TEMP 'live-run.log'
 
 function RL([string]$m) {
