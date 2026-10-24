@@ -6,3 +6,5 @@ exam-q.txt
 netcheck.txt
 *.png
 !docs/*.png
+# 归档的题库（含真实题目，默认不入库）
+archive/

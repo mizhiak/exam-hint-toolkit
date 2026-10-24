@@ -55,6 +55,10 @@ powershell -File exam-live.ps1 -Demo -Theme dark -NoWDA
 | `Ctrl+Alt+=` / `Ctrl+Alt+-` | 字号增减 |
 | `Ctrl+Alt+W` / `Ctrl+Alt+S` | 宽度增减 |
 
+## 归档
+
+每次出答案都会把「时间 + 题干原文 + 答案」追加到 `archive\YYYY-MM-DD.txt`（不覆盖）。F7（剪贴板题干）和 F8（手打题干）同样入档，跑一次就是一份带原文的题库。
+
 ## 依赖
 
 - Windows 10/11，PowerShell 5.1

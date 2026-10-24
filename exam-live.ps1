@@ -498,6 +498,24 @@ function Split-Pages {
     return $out
 }
 
+$archDir = Join-Path $kit 'archive'
+function Archive-Item {
+    param([string]$Q, [string]$A)
+    if (-not $Q -and -not $A) { return }
+    try {
+        if (-not (Test-Path -LiteralPath $archDir)) { New-Item -ItemType Directory -Path $archDir -Force | Out-Null }
+        $f = Join-Path $archDir ((Get-Date -Format 'yyyy-MM-dd') + '.txt')
+        $sb = New-Object System.Text.StringBuilder
+        [void]$sb.AppendLine('======== ' + (Get-Date -Format 'HH:mm:ss') + ' ========')
+        [void]$sb.AppendLine('[题]')
+        foreach ($ln in ($Q -split "`r?`n")) { if ($ln.Trim()) { [void]$sb.AppendLine('  ' + $ln.Trim()) } }
+        [void]$sb.AppendLine('[答]')
+        foreach ($ln in ($A -split "`r?`n")) { if ($ln.Trim()) { [void]$sb.AppendLine('  ' + $ln.Trim()) } }
+        [void]$sb.AppendLine('')
+        [System.IO.File]::AppendAllText($f, $sb.ToString(), (New-Object System.Text.UTF8Encoding($true)))
+    } catch { }
+}
+
 function Show-Full {
     # 一次显示整段答案（复杂简答/SQL 用），按 Z 或 9 秒后自动收
     # 始终读最新的 answers.txt，避免用到上一次的旧分页
@@ -538,6 +556,7 @@ function Invoke-Manual {
     $script:shown = $true; $script:lastRaise = Get-Date; $script:showAt = Get-Date
     $script:hideAt = (Get-Date).AddSeconds($FullSeconds)
     RL "MANUAL shown chars=$($txt.Length)"
+    try { Archive-Item -Q $q -A $txt } catch { }
 }
 
 function Show-Answer {
@@ -650,6 +669,7 @@ $poll.Add_Tick({
                 if ($txt -match '无题目' -or $txt.Trim().Length -lt 3) { $script:lastCalc = Get-Date; RL "SKIP noshow len=$($txt.Length)"; return }
                 if ($script:lastAns -and $txt -eq $script:lastAns -and $script:autoFire) { $script:lastCalc = Get-Date; RL 'SKIP same answer'; return }
                 $script:lastAns = $txt
+                try { Archive-Item -Q (Get-Content -LiteralPath $qtxt -Raw -Encoding utf8) -A $txt } catch { }
                 if ($MaxChars -gt 0 -and $txt.Length -gt $MaxChars) { $txt = $txt.Substring(0, $MaxChars) + '…' }
                 # 短答案（含多数简答/SQL）：一次显示整段，不做分页
                 if ($txt.Length -le $InlineMax) {
@@ -697,6 +717,7 @@ $poll.Add_Tick({
                         $script:shown = $true; $script:lastRaise = Get-Date; $script:showAt = Get-Date
                         $script:hideAt = (Get-Date).AddSeconds($FullSeconds)
                         RL "CLIP shown chars=$($ctxt.Length)"
+                        try { Archive-Item -Q $clip.Trim() -A $ctxt } catch { }
                     }
                 } catch { RL "CLIP-ERR $($_.Exception.Message)" }
             }
