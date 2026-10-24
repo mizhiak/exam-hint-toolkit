@@ -1,0 +1,8 @@
+# 运行时产物（含答案/日志，不入库）
+answers.txt
+exam-q.txt
+*.log
+复盘-*.txt
+netcheck.txt
+*.png
+!docs/*.png
